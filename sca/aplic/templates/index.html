@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OficinaDjango</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0; /* Remova as margens padrão do body */
+            padding: 0; /* Remova o preenchimento padrão do body */
+        }
+    
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between; /* Adicione esse estilo para espaçar os elementos */
+            align-items: center; /* Adicione esse estilo para centralizar verticalmente os elementos */
+        }
+    
+        .bottom {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none; /* Remova o sublinhado padrão de links */
+            display: inline-block; /* Transforme em bloco para ocupar a largura disponível */
+            margin: 0 10px; /* Adicione margens para espaçar os elementos */
+        }
+    
+        .bottom:hover {
+            background-color: #555; /* Adicione um efeito de hover */
+        }
+    
+        nav {
+            float: right;
+            padding: 20px;
+            background-color: #eee;
+            height: 100vh;
+        }
+    
+        section {
+            padding: 20px;
+        }
+    
+        .search-bar {
+            width: 50%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+    
+        .peca-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+    
+        .peca-item {
+            width: calc(33.33% - 20px);
+            box-sizing: border-box;
+            margin-bottom: 20px; /* Adicione uma margem inferior para espaçar os itens */
+        }
+    
+        .peca-item img {
+            max-width: 100%;
+            height: auto;
+            max-height: 150px;
+            object-fit: cover;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <header>
+        <h1>OficinaDjango</h1>
+        <a href="{% url 'admin:index' %}" class="bottom">Login</a>
+        <a href="{% url 'index' %}" class="bottom">Home</a>
+        <a href="{% url 'pecas' %}" class="bottom">pecas</a>
+        <a href="" class="bottom">Orçamento</a>
+    </header>
+    <section>
+        <input type="text" class="search-bar" placeholder="Pesquisar peças...">
+        <!-- Adicione o restante do conteúdo da sua página aqui -->
+    </section>
+
+</body>
+
+</html>
