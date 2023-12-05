@@ -96,6 +96,7 @@ class Peca(models.Model):
     PrecoVendaFinal = models.DecimalField(max_digits=10, decimal_places=2)
     QtdTotalVendida = models.PositiveIntegerField()
     TotalEmVendas = models.DecimalField(max_digits=10, decimal_places=2)
+    quantidade_no_carrinho = models.IntegerField(null=True, blank=True)
     ImagemPeca = models.ImageField(upload_to='pecas/', null=True, blank=True)
 
     def __str__(self):
