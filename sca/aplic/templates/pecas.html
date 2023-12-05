@@ -114,6 +114,7 @@
         </form>
         <div class="peca-container">
             {% for peca in pecas %}
+            <a href="{% url 'detalhe_produto' id=peca.id %}">
             <div class="peca-item">
                 <h2>{{ peca.TipoPeca }}</h2>
                 <p>Marca: {{ peca.MarcaPeca }}</p>
@@ -127,6 +128,7 @@
                 {% endif %}
                     {% csrf_token %}
                     <button type="submit" class="add-to-cart-btn">Adicionar</button>
+                </a>
             </div>
             {% endfor %}
         </div>

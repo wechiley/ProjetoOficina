@@ -1,4 +1,5 @@
-
+from django.views.generic import ListView
+from typing import Any
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import TemplateView
@@ -47,5 +48,15 @@ class CadastrarFuncionarioView(View):
             form.save()
             return redirect('index')  # ou redirecione para a página desejada após o cadastro
         return render(request, self.template_name, {'form': form})   
+    
+class DetalhesView(ListView):
+    template_name = 'detalhes.html'
+    paginate_by = 5
+    ordering = 'TipoPeca'
+    model = Peca
 
-
+    def get_context_data(self, **kwargs: Any):
+        context = super(DetalhesView, self).get_context_data(**kwargs)
+        id = self.kwargs['id']
+        context['peca'] = Peca.objects.filter(id=id).first()
+        return context
