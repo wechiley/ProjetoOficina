@@ -1,6 +1,6 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,100 +8,129 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0; /* Remova as margens padrão do body */
-            padding: 0; /* Remova o preenchimento padrão do body */
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Cor de fundo do corpo */
         }
-    
+
         header {
             background-color: #333;
             color: white;
             padding: 10px;
             text-align: left;
             display: flex;
-            justify-content: space-between; /* Adicione esse estilo para espaçar os elementos */
-            align-items: center; /* Adicione esse estilo para centralizar verticalmente os elementos */
+            justify-content: space-between;
+            align-items: center;
         }
-    
+
         .bottom {
             background-color: #333;
             color: white;
             padding: 10px;
             text-align: center;
-            text-decoration: none; /* Remova o sublinhado padrão de links */
-            display: inline-block; /* Transforme em bloco para ocupar a largura disponível */
-            margin: 0 10px; /* Adicione margens para espaçar os elementos */
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
         }
-    
+
         .bottom:hover {
-            background-color: #555; /* Adicione um efeito de hover */
+            background-color: #555;
         }
-    
-        nav {
-            float: right;
-            padding: 20px;
-            background-color: #eee;
-            height: 100vh;
-        }
-    
+
         section {
             padding: 20px;
+            max-width: 1200px; /* Limite o tamanho máximo para melhor experiência do usuário */
+            margin: 0 auto; /* Centralize o conteúdo */
+            background-color: rgb(218, 205, 255); /* Cor de fundo do conteúdo */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px; /* Reduzi a margem superior para um espaçamento mais equilibrado */
         }
-    
+
         .search-bar {
-            width: 50%;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
             padding: 10px;
             margin-bottom: 20px;
         }
-    
+
         .peca-container {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
         }
-    
+
         .peca-item {
             width: calc(33.33% - 20px);
             box-sizing: border-box;
-            margin-bottom: 20px; /* Adicione uma margem inferior para espaçar os itens */
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-    
+
         .peca-item img {
             max-width: 100%;
             height: auto;
             max-height: 150px;
             object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .add-to-cart-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #45a049;
         }
     </style>
-    
+
 </head>
+
 <body>
     <header>
-        <h1>OficinaDjango</h1>
-        <a href="{% url 'admin:index' %}" class="bottom">Login</a>
+        <h1>Oficina Django</h1>
         <a href="{% url 'index' %}" class="bottom">Home</a>
-        <a href="{% url 'pecas' %}" class="bottom">pecas</a>
-        <a href="" class="bottom">Orçamento</a>
+        <a href="{% url 'pecas' %}" class="bottom">Peças</a>
+        <a href="{% url 'admin:index' %}" class="bottom">Acessar</a>
     </header>
     <section>
-        <input type="text" class="search-bar" placeholder="Pesquisar peças...">
-
+        <form action="{% url 'search_pecas' %}" method="get" class="search-bar">
+            <label for="search">Pesquisar peças:</label>
+            <input type="text" id="search" name="q" placeholder="Pesquisar peças...">
+            <button type="submit">Buscar</button>
+        </form>
         <div class="peca-container">
             {% for peca in pecas %}
-                <div class="peca-item">
-                    <h2>{{ peca.TipoPeca }}</h2>
-                    <p>Marca: {{ peca.MarcaPeca }}</p>
-                    <p>Modelo: {{ peca.ModeloPeca }}</p>
-                    <p>Estoque Atual: {{ peca.EstoqueAtual }}</p>
-                    <p>Preço: R$ {{ peca.PrecoVendaFinal }}</p>
-                    {% if peca.ImagemPeca %}
-                        <img src="{{ MEDIA_URL }}{{ peca.ImagemPeca.url }}" alt="Imagem da Peça">
-                    {% else %}
-                        <p>Sem imagem disponível</p>
-                    {% endif %}
-                </div>
+            <div class="peca-item">
+                <h2>{{ peca.TipoPeca }}</h2>
+                <p>Marca: {{ peca.MarcaPeca }}</p>
+                <p>Modelo: {{ peca.ModeloPeca }}</p>
+                <p>Estoque Atual: {{ peca.EstoqueAtual }}</p>
+                <p>Preço: R$ {{ peca.PrecoVendaFinal }}</p>
+                {% if peca.ImagemPeca %}
+                <img src="{{ MEDIA_URL }}{{ peca.ImagemPeca.url }}" alt="Imagem da Peça">
+                {% else %}
+                <p>Sem imagem disponível</p>
+                {% endif %}
+                    {% csrf_token %}
+                    <button type="submit" class="add-to-cart-btn">Adicionar</button>
+            </div>
             {% endfor %}
         </div>
-
     </section>
 </body>
+
 </html>

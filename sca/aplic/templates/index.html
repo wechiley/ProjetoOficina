@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OficinaDjango</title>
     <style>
+        
         body {
             font-family: Arial, sans-serif;
             margin: 0; /* Remova as margens padrão do body */
@@ -71,17 +72,17 @@
             max-height: 150px;
             object-fit: cover;
         }
+
     </style>
     
 </head>
 
 <body>
     <header>
-        <h1>OficinaDjango</h1>
-        <a href="{% url 'admin:index' %}" class="bottom">Login</a>
+        <h1>Oficina Django</h1>
         <a href="{% url 'index' %}" class="bottom">Home</a>
-        <a href="{% url 'pecas' %}" class="bottom">pecas</a>
-        <a href="" class="bottom">Orçamento</a>
+        <a href="{% url 'pecas' %}" class="bottom">Peças</a>
+        <a href="{% url 'admin:index' %}" class="bottom">Acessar</a>
     </header>
     <section>
         <input type="text" class="search-bar" placeholder="Pesquisar peças...">
