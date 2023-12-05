@@ -85,7 +85,13 @@
         <a href="{% url 'admin:index' %}" class="bottom">Acessar</a>
     </header>
     <section>
-      
+        <h2>Cadastrar Funcionário</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Cadastrar</button>
+        </form>
+    
         <input type="text" class="search-bar" placeholder="Pesquisar peças...">
         <!-- Adicione o restante do conteúdo da sua página aqui -->
     </section>
@@ -93,3 +99,7 @@
 </body>
 
 </html>
+
+
+    
+

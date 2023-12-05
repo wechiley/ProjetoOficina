@@ -1,8 +1,13 @@
-from django.db.models import Q
-from django.shortcuts import render
+
+from django.shortcuts import render, redirect
+from django.views import View
 from django.views.generic import TemplateView
+from .forms import FuncionarioForm
 from aplic.models import Peca
 from .models import Peca
+
+
+
 
 def index(request):
     return render(request, 'index.html')
@@ -29,14 +34,18 @@ class SearchPecaView(TemplateView):
         context['pecas'] = Peca.objects.filter(TipoPeca__icontains=query)
         return context
     
+class CadastrarFuncionarioView(View):
+    template_name = 'cadastrar_funcionario.html'
 
+    def get(self, request, *args, **kwargs):
+        form = FuncionarioForm()
+        return render(request, self.template_name, {'form': form})
 
-        
-
-    
-    
-
-    
-    
+    def post(self, request, *args, **kwargs):
+        form = FuncionarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')  # ou redirecione para a página desejada após o cadastro
+        return render(request, self.template_name, {'form': form})   
 
 
