@@ -118,8 +118,6 @@
             <div class="peca-item">
                 <h2>{{ peca.TipoPeca }}</h2>
                 <p>Marca: {{ peca.MarcaPeca }}</p>
-                <p>Modelo: {{ peca.ModeloPeca }}</p>
-                <p>Estoque Atual: {{ peca.EstoqueAtual }}</p>
                 <p>Preço: R$ {{ peca.PrecoVendaFinal }}</p>
                 {% if peca.ImagemPeca %}
                 <img src="{{ MEDIA_URL }}{{ peca.ImagemPeca.url }}" alt="Imagem da Peça">
